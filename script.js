@@ -1,56 +1,33 @@
-checkStorageMenu()
-function checkStorageMenu(){
-    if (localStorage.getItem("menu") !== null){
-        document.getElementById("continueOverlay").style.display = "block";
-        document.getElementById("timerOverlay").style.display = "none";
-        document.getElementById("stopwatchOverlay").style.display = "none";
-        document.getElementById("clockOverlay").style.display = "none";
-    }
-    else{
-        document.getElementById("continueOverlay").style.display = "none";
-    }
-}
+useStorageMenu();
 
-function useStorageMenu(){
-    
-    if (localStorage.getItem("menu") == "timer"){
-        document.getElementById("continueOverlay").style.display = "none";
-        document.getElementById("timerOverlay").style.display = "block";
-        document.getElementById("stopwatchOverlay").style.display = "none";
-        document.getElementById("clockOverlay").style.display = "none"; 
+function useStorageMenu() {
+
+    if (localStorage.getItem("menu") == "timer") {
+        overlayTimer();
     }
-    else if (localStorage.getItem("menu") == "stopwatch"){
-        document.getElementById("continueOverlay").style.display = "none";
-        document.getElementById("timerOverlay").style.display = "none";
-        document.getElementById("stopwatchOverlay").style.display = "block";
-        document.getElementById("clockOverlay").style.display = "none";
+    else if (localStorage.getItem("menu") == "stopwatch") {
+        overlayStopwatch();
     }
-    else{
-        document.getElementById("continueOverlay").style.display = "none";
-        document.getElementById("timerOverlay").style.display = "none";
-        document.getElementById("stopwatchOverlay").style.display = "none";
-        document.getElementById("clockOverlay").style.display = "block";
+    else {
+        overlayClock();
 
     }
 }
 
-function deleteStorageMenu(){
+function restart() {
     localStorage.removeItem("menu");
-    document.getElementById("continueOverlay").style.display = "none";
-    document.getElementById("timerOverlay").style.display = "none";
-    document.getElementById("stopwatchOverlay").style.display = "none";
-    document.getElementById("clockOverlay").style.display = "block";
+    overlayClock();
 }
 
 //swichting overlay
-function overlayClock(){
+function overlayClock() {
     document.getElementById("timerOverlay").style.display = "none";
     document.getElementById("stopwatchOverlay").style.display = "none";
     document.getElementById("clockOverlay").style.display = "block";
     localStorage.setItem("menu", "clock")
 }
 
-function overlayTimer(){
+function overlayTimer() {
     document.getElementById("timerOverlay").style.display = "block";
     document.getElementById("stopwatchOverlay").style.display = "none";
     document.getElementById("clockOverlay").style.display = "none";
@@ -58,7 +35,7 @@ function overlayTimer(){
 }
 
 
-function overlayStopwatch(){
+function overlayStopwatch() {
     document.getElementById("timerOverlay").style.display = "none";
     document.getElementById("stopwatchOverlay").style.display = "block";
     document.getElementById("clockOverlay").style.display = "none";
