@@ -19,7 +19,6 @@ function restart() {
     overlayClock();
 }
 
-//swichting overlay
 function overlayClock() {
     document.getElementById("timerOverlay").style.display = "none";
     document.getElementById("stopwatchOverlay").style.display = "none";
@@ -33,7 +32,6 @@ function overlayTimer() {
     document.getElementById("clockOverlay").style.display = "none";
     localStorage.setItem("menu", "timer")
 }
-
 
 function overlayStopwatch() {
     document.getElementById("timerOverlay").style.display = "none";
