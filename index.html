@@ -8,28 +8,26 @@
 </head>
 
 <body>
+    <div id="menu">
+        <div id="menuItems">
+            <div><button id="timer" onclick="overlayTimer()">Timer</button></div>
+            <div><button id="clock" onclick="overlayClock()">Clock</button></div>
+            <div><button id="stopwatch" onclick="overlayStopwatch()">Stopwatch</button></div>
+        </div>
+    </div>
+
     <div id="content">
 
         <div id="clockOverlay">
-            <div id="menu">
-                <div><button id="timer" onclick="overlayTimer()">Timer</button></div>
-                <div><button id="clock" onclick="overlayClock()">Clock</button></div>
-                <div><button id="stopwatch" onclick="overlayStopwatch()">Stopwatch</button></div>
-            </div>
-            <p id="clock">PLACEHOLDER CLOCK</p>
-            <p id="date">PLACEHOLDER DATE</p>
+            <p class="clockOverlay" id="time"></p>
+            <p class="clockOverlay" id="date"></p>
         </div>
 
         <div id="timerOverlay" style="display:none;">
-            <div id="menu">
-                <div><button id="timer" onclick="overlayTimer()">Timer</button></div>
-                <div><button id="clock" onclick="overlayClock()">Clock</button></div>
-                <div><button id="stopwatch" onclick="overlayStopwatch()">Stopwatch</button></div>
-            </div>
-            <p id="clockTimer">PLACEHOLDER CLOCK TIMER</p>
-            <div id="menu">
-                <button id="resetTimer">Reset</button>
-                <button id="startTimer">Start</button>
+            <p id="clockTimer">00:00:00</p>
+            <div id="menuTimer">
+                <button id="resetTimer" onclick="resetTimer()">Reset</button>
+                <button id="startPauseTimer" onclick="startPauseTimer()">Start</button>
                 <button id="changeTimer">Change</button>
             </div>
             <div id="sessions">
@@ -38,14 +36,10 @@
         </div>
 
         <div id="stopwatchOverlay" style="display:none;">
-            <div id="menu">
-                <div><button id="timer" onclick="overlayTimer()">Timer</button></div>
-                <div><button id="clock" onclick="overlayClock()">Clock</button></div>
-                <div><button id="stopwatch" onclick="overlayStopwatch()">Stopwatch</button></div>
-            </div>
+
             <p id="clockStopwatch">PLACEHOLDER CLOCK STOPWATCH</p>
             <div id="menuStopwatch">
-                <button id="resetStopwatch">Reset</button>
+                <button id="StopStopwatch">Stop</button>
                 <button id="startStopwatch">Start</button>
                 <button id="safeStopwatch">Safe</button>
             </div>
@@ -57,7 +51,6 @@
     </div>
 
     <button id="restart" onclick="restart()">Restart</button>
-    <div id="time">TIME</div>
 
     <script src="script.js"></script>
 </body>

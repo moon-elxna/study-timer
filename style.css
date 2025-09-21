@@ -1,9 +1,32 @@
+div#menuItems {
+    display: flex;
+    gap: 8px;
+}
+
 div#menu {
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 div#content {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+p.clockOverlay {
+    text-align: center;
+}
+
+p#time {
+    font-size: 52px;
+}
+
+p#date {
+    font-size: 24px;
+}
+
+button {
+    width: 100px;
 }
