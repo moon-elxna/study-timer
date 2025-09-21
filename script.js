@@ -1,4 +1,17 @@
 useStorageMenu();
+unixToTime((Date.now() / 1000).toFixed(0));
+
+function unixToTime(timestamp) {
+    const date = new Date(timestamp * 1000); // convert seconds → ms
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+    const seconds = String(date.getSeconds()).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // months start at 0
+    const year = String(date.getFullYear()).slice(-2);
+    document.getElementById("time").innerHTML = hours + ":" + minutes + ": " + seconds + ", " + day + "." + month + "." + year;
+    //ChatGPT retten einfax Leben xd 
+}
 
 function useStorageMenu() {
 
