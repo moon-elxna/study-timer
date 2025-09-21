@@ -1,3 +1,6 @@
+let timerID;
+let elapsedTime;
+
 useStorageMenu();
 setClock();
 
@@ -38,8 +41,7 @@ function setClock() {
     }, 10);;
 }
 
-let timerID;
-let elapsedTime;
+
 function startPauseTimer() {
     const startPause = document.getElementById("startPauseTimer").innerHTML;
 
@@ -71,8 +73,6 @@ function resetTimer() {
     document.getElementById("clockTimer").innerHTML = "00:00:00";
     document.getElementById("startPauseTimer").innerHTML = "Start"
 }
-
-
 
 function useStorageMenu() {
 
