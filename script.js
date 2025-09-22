@@ -41,7 +41,6 @@ function setClock() {
     }, 10);;
 }
 
-
 function startPauseTimer() {
     const startPause = document.getElementById("startPauseTimer").innerHTML;
 
@@ -72,6 +71,11 @@ function resetTimer() {
     clearInterval(timerID);
     document.getElementById("clockTimer").innerHTML = "00:00:00";
     document.getElementById("startPauseTimer").innerHTML = "Start"
+}
+function saveTimer() {
+    resetTimer();
+    document.getElementById("sessions").innerHTML = unixToTime(elapsedTime / 1000);
+
 }
 
 function useStorageMenu() {
