@@ -25,7 +25,9 @@ function useLocalStorage() {
 }
 
 function restart() {
-    localStorage.removeItem("menu", "sessions");
+    localStorage.removeItem("menu");
+    localStorage.removeItem("sessions");
+    document.getElementById("sessions").innerHTML = " ";
     overlayClock();
 }
 
@@ -58,14 +60,22 @@ function startPause(mode) {
             document.getElementById("startPauseStopwatch").innerHTML = "Pause";
         }
     }
-    else if (mode === "timer") {
-        const hours = parseInt(document.getElementById("hourTimer").value);
-        const minutes = parseInt(document.getElementById("minuteTimer").value);
-        const seconds = parseInt(document.getElementById("secondTimer").value);
-        duration = timeToUnix(hours, minutes, seconds);
-        const startPause = document.getElementById("startPauseTimer").innerHTML;
 
+    else if (mode === "timer") {
+
+        //get value from input as integeres when NaN then queal to 0
+        const hours = parseInt(document.getElementById("hourTimer").value) || 0;
+        const minutes = parseInt(document.getElementById("minuteTimer").value) || 0;
+        const seconds = parseInt(document.getElementById("secondTimer").value) || 0;
+
+        duration = timeToUnix(hours, minutes, seconds);
+
+        const startPause = document.getElementById("startPauseTimer").innerHTML;
         if (startPause === "Start") {
+            //clear user input
+            document.getElementById("hourTimer").value = "";
+            document.getElementById("minuteTimer").value = "";
+            document.getElementById("secondTimer").value = "";
             const targetTime = Date.now() + duration;
             timerID = setInterval(function () {
                 remainingTime = (targetTime) - Date.now();
