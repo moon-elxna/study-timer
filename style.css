@@ -9,10 +9,26 @@ div#menu {
     align-items: center;
 }
 
+div#body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
 div#content {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+div#inputTimer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 32px;
+    gap: 12px;
 }
 
 p.clockOverlay {
@@ -29,4 +45,8 @@ p#date {
 
 button {
     width: 100px;
+}
+
+input.timer {
+    width: 48px;
 }

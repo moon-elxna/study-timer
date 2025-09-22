@@ -1,8 +1,119 @@
-let timerID;
-let elapsedTime;
-
 useStorageMenu();
 setClock();
+
+let stopwatchID;
+let elapsedTime;
+let timerID;
+let remainingTime;
+let duration;
+
+
+function startPauseStopwatch() {
+    const startPause = document.getElementById("startPauseStopwatch").innerHTML;
+
+    if (startPause === "Start") {
+        const startTime = Date.now();
+        stopwatchID = setInterval(function () {
+            elapsedTime = (Date.now() - (startTime));
+            document.getElementById("clockStopwatch").innerHTML = unixToTime((elapsedTime / 1000).toFixed(0));
+        }, 100);
+        document.getElementById("startPauseStopwatch").innerHTML = "Pause";
+
+    }
+    else if (startPause === "Pause") {
+        clearInterval(stopwatchID);
+        document.getElementById("startPauseStopwatch").innerHTML = "Continue";
+    }
+    else if (startPause === "Continue") {
+        const startTime = Date.now() - elapsedTime;
+        stopwatchID = setInterval(function () {
+            elapsedTime = (Date.now() - (startTime));
+            document.getElementById("clockStopwatch").innerHTML = unixToTime((elapsedTime / 1000).toFixed(0));
+        }, 100);
+        document.getElementById("startPauseStopwatch").innerHTML = "Pause";
+    }
+}
+
+function resetStopwatch() {
+    clearInterval(stopwatchID);
+    document.getElementById("clockStopwatch").innerHTML = "00:00:00";
+    document.getElementById("startPauseStopwatch").innerHTML = "Start"
+}
+
+function saveStopwatch() {
+    resetStopwatch();
+    document.getElementById("sessions").innerHTML = unixToTime(elapsedTime / 1000);
+}
+
+
+function startPauseTimer() {
+    const hours = parseInt(document.getElementById("hourTimer").value);
+    const minutes = parseInt(document.getElementById("minuteTimer").value);
+    const seconds = parseInt(document.getElementById("secondTimer").value);
+    duration = timeToUnix(hours, minutes, seconds);
+    const startPause = document.getElementById("startPauseTimer").innerHTML;
+
+    if (startPause === "Start") {
+        const targetTime = Date.now() + duration;
+        timerID = setInterval(function () {
+            remainingTime = (targetTime) - Date.now();
+            document.getElementById("clockTimer").innerHTML = unixToTime((remainingTime / 1000).toFixed(0));
+        }, 100);
+        document.getElementById("startPauseTimer").innerHTML = "Pause";
+    }
+
+    else if (startPause === "Pause") {
+        clearInterval(timerID);
+        document.getElementById("startPauseTimer").innerHTML = "Continue";
+    }
+
+    else if (startPause === "Continue") {
+        const targetTime = remainingTime + Date.now();
+        timerID = setInterval(function () {
+            remainingTime = (targetTime) - Date.now();
+            document.getElementById("clockTimer").innerHTML = unixToTime((remainingTime / 1000).toFixed(0));
+        }, 100);
+        document.getElementById("startPauseTimer").innerHTML = "Pause";
+    }
+
+}
+
+function resetTimer() {
+    clearInterval(timerID);
+    document.getElementById("clockTimer").innerHTML = "00:00:00";
+    document.getElementById("startPauseTimer").innerHTML = "Start"
+}
+
+function saveTimer() {
+    resetStopwatch();
+    document.getElementById("sessions").innerHTML = unixToTime(duration / 1000);
+}
+
+function restart() {
+    localStorage.removeItem("menu");
+    overlayClock();
+}
+
+function overlayClock() {
+    document.getElementById("timerOverlay").style.display = "none";
+    document.getElementById("stopwatchOverlay").style.display = "none";
+    document.getElementById("clockOverlay").style.display = "block";
+    localStorage.setItem("menu", "clock")
+}
+
+function overlayTimer() {
+    document.getElementById("timerOverlay").style.display = "block";
+    document.getElementById("stopwatchOverlay").style.display = "none";
+    document.getElementById("clockOverlay").style.display = "none";
+    localStorage.setItem("menu", "timer")
+}
+
+function overlayStopwatch() {
+    document.getElementById("timerOverlay").style.display = "none";
+    document.getElementById("stopwatchOverlay").style.display = "block";
+    document.getElementById("clockOverlay").style.display = "none";
+    localStorage.setItem("menu", "stopwatch")
+}
 
 function unixToDate(timestamp) {
     const n = new Date(timestamp * 1000); // convert seconds → ms
@@ -31,6 +142,15 @@ function unixToTime(timestamp, mode) {
     }
 }
 
+function timeToUnix(hours, minutes, seconds) {
+    //conversion into ms
+    const hoursMs = hours * 3600000;
+    const minutesMs = minutes * 60000;
+    const secondsMs = seconds * 1000;
+    const timestamp = hoursMs + minutesMs + secondsMs;
+    return timestamp;
+}
+
 function setClock() {
     setInterval(function () {
         document.getElementById("time").innerHTML = unixToTime((Date.now() / 1000).toFixed(0), "clock");
@@ -39,43 +159,6 @@ function setClock() {
     setInterval(function () {
         document.getElementById("date").innerHTML = unixToDate((Date.now() / 1000).toFixed(0));
     }, 10);;
-}
-
-function startPauseTimer() {
-    const startPause = document.getElementById("startPauseTimer").innerHTML;
-
-    if (startPause === "Start") {
-        const startTime = Date.now();
-        timerID = setInterval(function () {
-            elapsedTime = (Date.now() - (startTime));
-            document.getElementById("clockTimer").innerHTML = unixToTime((elapsedTime / 1000).toFixed(0));
-        }, 100);
-        document.getElementById("startPauseTimer").innerHTML = "Pause";
-
-    }
-    else if (startPause === "Pause") {
-        clearInterval(timerID);
-        document.getElementById("startPauseTimer").innerHTML = "Continue";
-    }
-    else if (startPause === "Continue") {
-        const startTime = Date.now() - elapsedTime;
-        timerID = setInterval(function () {
-            elapsedTime = (Date.now() - (startTime));
-            document.getElementById("clockTimer").innerHTML = unixToTime((elapsedTime / 1000).toFixed(0));
-        }, 100);
-        document.getElementById("startPauseTimer").innerHTML = "Pause";
-    }
-}
-
-function resetTimer() {
-    clearInterval(timerID);
-    document.getElementById("clockTimer").innerHTML = "00:00:00";
-    document.getElementById("startPauseTimer").innerHTML = "Start"
-}
-function saveTimer() {
-    resetTimer();
-    document.getElementById("sessions").innerHTML = unixToTime(elapsedTime / 1000);
-
 }
 
 function useStorageMenu() {
@@ -90,30 +173,4 @@ function useStorageMenu() {
         overlayClock();
 
     }
-}
-
-function restart() {
-    localStorage.removeItem("menu");
-    overlayClock();
-}
-
-function overlayClock() {
-    document.getElementById("timerOverlay").style.display = "none";
-    document.getElementById("stopwatchOverlay").style.display = "none";
-    document.getElementById("clockOverlay").style.display = "block";
-    localStorage.setItem("menu", "clock")
-}
-
-function overlayTimer() {
-    document.getElementById("timerOverlay").style.display = "block";
-    document.getElementById("stopwatchOverlay").style.display = "none";
-    document.getElementById("clockOverlay").style.display = "none";
-    localStorage.setItem("menu", "timer")
-}
-
-function overlayStopwatch() {
-    document.getElementById("timerOverlay").style.display = "none";
-    document.getElementById("stopwatchOverlay").style.display = "block";
-    document.getElementById("clockOverlay").style.display = "none";
-    localStorage.setItem("menu", "stopwatch")
 }
