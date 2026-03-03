@@ -1,3 +1,4 @@
+//---main---
 let stopwatchID;
 let elapsedTime;
 let timerID;
@@ -6,7 +7,9 @@ let duration;
 useLocalStorage();
 setClock();
 
+//---EventListeners---
 
+//---functions---
 // using local storage
 function useLocalStorage() {
 

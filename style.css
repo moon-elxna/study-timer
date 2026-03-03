@@ -1,3 +1,6 @@
+/*---font---*/
+
+/*--div---*/
 div#menuItems {
     display: flex;
     gap: 8px;
@@ -31,6 +34,9 @@ div#inputTimer {
     gap: 12px;
 }
 
+/*---img---*/
+
+/*---text---*/
 p.clockOverlay {
     text-align: center;
 }
@@ -43,10 +49,17 @@ p#date {
     font-size: 24px;
 }
 
+/*---btn---*/
 button {
     width: 100px;
 }
 
+/*---input---*/
 input.timer {
     width: 48px;
+}
+
+/*---media---*/
+@media(max-width: 700px){
+    
 }
