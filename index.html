@@ -4,35 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preload" href="style.css" as="style" onload="this.rel='stylesheet'">
-    <link rel="preload" href="script.js" as="script">
-    <link rel="icon" href="assets/img" type="image/png">
+    <link rel="icon" href="" type="image/png">
     <title>Study Clock</title>
 </head>
 
 <body>
     <div id="body">
-
         <div id="menu">
             <div id="menuItems">
-                <div><button id="timer" onclick="overlayTimer()">Timer</button></div>
-                <div><button id="clock" onclick="overlayClock()">Clock</button></div>
-                <div><button id="stopwatch" onclick="overlayStopwatch()">Stopwatch</button></div>
+                <div><button id="timer">Timer</button></div>
+                <div><button id="clock">Clock</button></div>
+                <div><button id="stopwatch">Stopwatch</button></div>
             </div>
         </div>
-
         <div id="content">
-
-            <div id="clockOverlay">
-
-                <p class="clockOverlay" id="time"></p>
-                <p class="clockOverlay" id="date"></p>
-
+            <div id="clock_overlay">
+                <p class="clock_overlay" id="time"></p>
+                <p class="clock_overlay" id="date"></p>
             </div>
 
-            <div id="timerOverlay" style="display:none;">
-
-                <p id="clockTimer">00:00:00</p>
-                <div id="inputTimer">
+            <div id="timer_overlay" style="display:none;">
+                <p id="clock_timer">00:00:00</p>
+                <div id="input_timer">
                     <div><input type="number" id="hourTimer" class="timer"></div>
                     <div>h</div>
                     <div><input type="number" id="minuteTimer" class="timer"></div>
@@ -50,7 +43,7 @@
 
             </div>
 
-            <div id="stopwatchOverlay" style="display:none;">
+            <div id="stopwatch_overlay" style="display:none;">
 
                 <p id="clockStopwatch">00:00:00</p>
 
